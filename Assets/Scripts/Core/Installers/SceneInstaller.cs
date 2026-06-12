@@ -1,4 +1,5 @@
-﻿using Core.Http;
+﻿using Core.Configs;
+using Core.Http;
 using Core.RequestQueue;
 using Features.Clicker;
 using Features.Dogs;
@@ -19,15 +20,20 @@ namespace Core.Installers
         [SerializeField] private ClickerTabView m_clickerTabView;
         [SerializeField] private WeatherTabView m_weatherTabView;
         [SerializeField] private DogsTabView m_dogsTabView;
+        
+        [Header("Clicker")]
+        [SerializeField] private ClickerConfig m_clickerConfig;
+        [SerializeField] private CurrencyFlyView m_currencyFlyPrefab;
+        [SerializeField] private Transform m_currencyFlyPoolParent;
 
         public override void InstallBindings()
         {
             Debug.Log("[SceneInstaller] InstallBindings");
 
             BindViews();
+            BindClicker();
+            BindPools();
             BindPresenters();
-            
-            BindTest();
         }
 
         private void BindViews()
@@ -49,6 +55,32 @@ namespace Core.Installers
                 .BindInterfacesAndSelfTo<NavigationPresenter>()
                 .AsSingle()
                 .NonLazy();
+        }
+        
+        private void BindClicker()
+        {
+            if (m_clickerConfig == null)
+                throw new MissingReferenceException($"{nameof(ClickerConfig)} is not assigned");
+
+            Container.Bind<ClickerConfig>().FromInstance(m_clickerConfig).AsSingle();
+
+            Container
+                .Bind<ClickerModel>()
+                .AsSingle()
+                .WithArguments(
+                    m_clickerConfig.initialCurrency,
+                    m_clickerConfig.initialEnergy);
+
+            Container.Bind<ClickerService>().AsSingle();
+        }
+        
+        private void BindPools()
+        {
+            Container
+                .BindMemoryPool<CurrencyFlyView, CurrencyFlyView.Pool>()
+                .WithInitialSize(5)
+                .FromComponentInNewPrefab(m_currencyFlyPrefab)
+                .UnderTransform(m_currencyFlyPoolParent);
         }
         
         private void BindTest()

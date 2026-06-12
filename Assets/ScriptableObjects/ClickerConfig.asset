@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9cdf3a0dd04d0e8215fd76700fc370, type: 3}
   m_Name: ClickerConfig
   m_EditorClassIdentifier: 
-  InitialEnergy: 100
-  MaxEnergy: 1000
-  EnergyPerClick: 1
-  CurrencyPerClick: 1
-  AutoClickIntervalSeconds: 3
-  EnergyRestoreIntervalSeconds: 10
-  EnergyRestoreAmount: 10
+  m_initialCurrency: 0
+  m_currencyPerClick: 1
+  m_initialEnergy: 1000
+  m_maxEnergy: 1000
+  m_energyCostPerClick: 1
+  m_autoClickIntervalSeconds: 3
+  m_energyRestoreIntervalSeconds: 10
+  m_energyRestoreAmount: 10
