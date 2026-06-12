@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Features\Navigation\Presenters\ITabPresenter.cs" />
     <Compile Include="Assets\Scripts\Features\Clicker\ClickerService.cs" />
     <Compile Include="Assets\Scripts\Core\RequestQueue\RequestHandle.cs" />
+    <Compile Include="Assets\Scripts\Features\Loading\LoadingView.cs" />
     <Compile Include="Assets\Scripts\Features\Dogs\Models\DogBreedViewData.cs" />
     <Compile Include="Assets\Scripts\Core\RequestQueue\FakeRequestCommand.cs" />
     <Compile Include="Assets\Scripts\Features\Popup\PopupService.cs" />
