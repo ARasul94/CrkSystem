@@ -52,15 +52,15 @@ namespace Features.Clicker
         
         public sealed class Pool : MemoryPool<CurrencyFlyView>
         {
-            protected override void OnDespawned(CurrencyFlyView item)
+            protected override void OnDespawned(CurrencyFlyView _item)
             {
-                item.Stop();
-                item.gameObject.SetActive(false);
+                _item.Stop();
+                _item.gameObject.SetActive(false);
             }
 
-            protected override void OnSpawned(CurrencyFlyView item)
+            protected override void OnSpawned(CurrencyFlyView _item)
             {
-                item.gameObject.SetActive(true);
+                _item.gameObject.SetActive(true);
             }
         }
     }

@@ -14,6 +14,7 @@ namespace Core.Http
                 throw new ArgumentException("Url is null or empty.", nameof(_url));
 
             using UnityWebRequest request = UnityWebRequest.Get(_url);
+            request.timeout = 5;
 
             using CancellationTokenRegistration cancellationRegistration =
                 _cancellationToken.Register(() =>
@@ -44,6 +45,50 @@ namespace Core.Http
             catch (OperationCanceledException)
             {
                 Debug.Log($"[HttpClient] GET canceled: {_url}");
+                throw;
+            }
+        }
+        
+        public async UniTask<Sprite> LoadSpriteAsync(string _url, CancellationToken _cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(_url))
+                throw new ArgumentException("Image url is null or empty.", nameof(_url));
+
+            using UnityWebRequest request = UnityWebRequestTexture.GetTexture(_url);
+            request.timeout = 5;
+
+            using CancellationTokenRegistration registration =
+                _cancellationToken.Register(() =>
+                {
+                    if (!request.isDone)
+                    {
+                        Debug.Log($"[HttpClient] Abort request: {_url}");
+                        request.Abort();
+                    }
+                });
+
+            try
+            {
+                Debug.Log($"[HttpClient] LoadSprite started: {_url}");
+                
+                await request
+                    .SendWebRequest()
+                    .ToUniTask(cancellationToken: _cancellationToken);
+                
+                ThrowIfRequestFailed(request, _url);
+
+                Texture2D texture = DownloadHandlerTexture.GetContent(request);
+
+                Debug.Log($"[HttpClient] LoadSprite success: {_url}");
+                
+                return Sprite.Create(
+                    texture,
+                    new Rect(0, 0, texture.width, texture.height),
+                    new Vector2(0.5f, 0.5f));
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log($"[HttpClient] LoadSprite canceled: {_url}");
                 throw;
             }
         }

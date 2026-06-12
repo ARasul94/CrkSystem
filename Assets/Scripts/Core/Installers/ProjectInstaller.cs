@@ -1,6 +1,8 @@
-﻿using Core.Http;
+﻿using Core.Configs;
+using Core.Http;
 using Core.RequestQueue;
 using DefaultNamespace;
+using Features.Weather.Services;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +20,7 @@ namespace Core.Installers
             BindConfigs();
             BindRequestQueue();
             BindHttpClient();
+            BindApiServices();
         }
         
         private void BindConfigs()
@@ -47,6 +50,13 @@ namespace Core.Installers
             Container
                 .Bind<IHttpClient>()
                 .To<RestClient>()
+                .AsSingle();
+        }
+        
+        private void BindApiServices()
+        {
+            Container
+                .Bind<WeatherApiService>()
                 .AsSingle();
         }
     }

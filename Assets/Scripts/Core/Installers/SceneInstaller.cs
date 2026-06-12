@@ -5,7 +5,8 @@ using Features.Clicker;
 using Features.Dogs;
 using Features.Navigation;
 using Features.Navigation.Tabs;
-using Features.Weather;
+using Features.Weather.Presenters;
+using Features.Weather.Views;
 using UnityEngine;
 using Zenject;
 
