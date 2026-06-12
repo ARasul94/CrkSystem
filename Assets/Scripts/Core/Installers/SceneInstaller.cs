@@ -3,6 +3,8 @@ using Core.Http;
 using Core.RequestQueue;
 using Features.Clicker;
 using Features.Dogs;
+using Features.Dogs.Presenters;
+using Features.Dogs.Views;
 using Features.Navigation;
 using Features.Navigation.Tabs;
 using Features.Weather.Presenters;
@@ -26,6 +28,10 @@ namespace Core.Installers
         [SerializeField] private ClickerConfig m_clickerConfig;
         [SerializeField] private CurrencyFlyView m_currencyFlyPrefab;
         [SerializeField] private Transform m_currencyFlyPoolParent;
+        
+        [Header("Dogs")]
+        [SerializeField] private DogBreedItemView m_dogBreedItemPrefab;
+        [SerializeField] private Transform m_dogBreedItemsPoolParent;
 
         public override void InstallBindings()
         {
@@ -44,6 +50,8 @@ namespace Core.Installers
             Container.Bind<ClickerTabView>().FromInstance(m_clickerTabView).AsSingle();
             Container.Bind<WeatherTabView>().FromInstance(m_weatherTabView).AsSingle();
             Container.Bind<DogsTabView>().FromInstance(m_dogsTabView).AsSingle();
+            
+            Container.QueueForInject(m_dogsTabView);
         }
 
         private void BindPresenters()
@@ -82,6 +90,12 @@ namespace Core.Installers
                 .WithInitialSize(5)
                 .FromComponentInNewPrefab(m_currencyFlyPrefab)
                 .UnderTransform(m_currencyFlyPoolParent);
+            
+            Container
+                .BindMemoryPool<DogBreedItemView, DogBreedItemView.Pool>()
+                .WithInitialSize(10)
+                .FromComponentInNewPrefab(m_dogBreedItemPrefab)
+                .UnderTransform(m_dogBreedItemsPoolParent);
         }
         
         private void BindTest()

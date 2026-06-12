@@ -2,6 +2,8 @@
 using Core.Http;
 using Core.RequestQueue;
 using DefaultNamespace;
+using Features.Dogs.Services;
+using Features.Popup;
 using Features.Weather.Services;
 using UnityEngine;
 using Zenject;
@@ -21,6 +23,7 @@ namespace Core.Installers
             BindRequestQueue();
             BindHttpClient();
             BindApiServices();
+            BindPopup();
         }
         
         private void BindConfigs()
@@ -57,6 +60,18 @@ namespace Core.Installers
         {
             Container
                 .Bind<WeatherApiService>()
+                .AsSingle();
+            
+            Container
+                .Bind<DogsApiService>()
+                .AsSingle();
+        }
+        
+        private void BindPopup()
+        {
+            Container
+                .Bind<IPopupService>()
+                .To<DebugPopupService>()
                 .AsSingle();
         }
     }
