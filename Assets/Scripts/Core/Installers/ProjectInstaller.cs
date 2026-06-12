@@ -23,7 +23,6 @@ namespace Core.Installers
             BindRequestQueue();
             BindHttpClient();
             BindApiServices();
-            BindPopup();
         }
         
         private void BindConfigs()
@@ -64,14 +63,6 @@ namespace Core.Installers
             
             Container
                 .Bind<DogsApiService>()
-                .AsSingle();
-        }
-        
-        private void BindPopup()
-        {
-            Container
-                .Bind<IPopupService>()
-                .To<DebugPopupService>()
                 .AsSingle();
         }
     }

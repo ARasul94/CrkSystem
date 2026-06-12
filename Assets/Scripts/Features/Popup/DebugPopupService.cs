@@ -8,5 +8,9 @@ namespace Features.Popup
         {
             Debug.Log($"[Popup] {_title}\n{_description}");
         }
+
+        public void Hide()
+        {
+        }
     }
 }

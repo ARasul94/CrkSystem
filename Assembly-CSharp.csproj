@@ -48,6 +48,7 @@
     <Compile Include="Assets\Scripts\Core\Configs\ApiConfig.cs" />
     <Compile Include="Assets\Scripts\Features\Dogs\Services\DogsApiService.cs" />
     <Compile Include="Assets\Scripts\Core\RequestQueue\IRequestQueue.cs" />
+    <Compile Include="Assets\Scripts\Features\Popup\PopupView.cs" />
     <Compile Include="Assets\Scripts\Features\Popup\IPopupService.cs" />
     <Compile Include="Assets\Scripts\Features\Weather\Models\WeatherViewData.cs" />
     <Compile Include="Assets\Scripts\Core\Http\IHttpClient.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scripts\Core\RequestQueue\RequestHandle.cs" />
     <Compile Include="Assets\Scripts\Features\Dogs\Models\DogBreedViewData.cs" />
     <Compile Include="Assets\Scripts\Core\RequestQueue\FakeRequestCommand.cs" />
+    <Compile Include="Assets\Scripts\Features\Popup\PopupService.cs" />
     <Compile Include="Assets\Scripts\Features\Dogs\Views\DogsTabView.cs" />
     <Compile Include="Assets\Scripts\Features\Weather\Services\WeatherApiService.cs" />
     <Compile Include="Assets\Scripts\Core\RequestQueue\RequestQueueService.cs" />

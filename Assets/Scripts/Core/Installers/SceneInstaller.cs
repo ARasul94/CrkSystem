@@ -7,6 +7,7 @@ using Features.Dogs.Presenters;
 using Features.Dogs.Views;
 using Features.Navigation;
 using Features.Navigation.Tabs;
+using Features.Popup;
 using Features.Weather.Presenters;
 using Features.Weather.Views;
 using UnityEngine;
@@ -32,6 +33,9 @@ namespace Core.Installers
         [Header("Dogs")]
         [SerializeField] private DogBreedItemView m_dogBreedItemPrefab;
         [SerializeField] private Transform m_dogBreedItemsPoolParent;
+        
+        [Header("Popup")]
+        [SerializeField] private PopupView m_popupView;
 
         public override void InstallBindings()
         {
@@ -40,6 +44,7 @@ namespace Core.Installers
             BindViews();
             BindClicker();
             BindPools();
+            BindServices();
             BindPresenters();
         }
 
@@ -50,6 +55,8 @@ namespace Core.Installers
             Container.Bind<ClickerTabView>().FromInstance(m_clickerTabView).AsSingle();
             Container.Bind<WeatherTabView>().FromInstance(m_weatherTabView).AsSingle();
             Container.Bind<DogsTabView>().FromInstance(m_dogsTabView).AsSingle();
+            
+            Container.Bind<PopupView>().FromInstance(m_popupView).AsSingle();
             
             Container.QueueForInject(m_dogsTabView);
         }
@@ -62,6 +69,14 @@ namespace Core.Installers
 
             Container
                 .BindInterfacesAndSelfTo<NavigationPresenter>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindServices()
+        {
+            Container
+                .BindInterfacesAndSelfTo<PopupService>()
                 .AsSingle()
                 .NonLazy();
         }

@@ -175,9 +175,6 @@ namespace Features.Dogs.Presenters
             if (string.IsNullOrWhiteSpace(_breedId))
                 return;
 
-            if (m_selectedBreedId == _breedId)
-                return;
-
             Debug.Log($"[DogsPresenter] Breed clicked: {_breedId}");
 
             CancelCurrentDetailsRequest();
