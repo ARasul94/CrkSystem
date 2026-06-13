@@ -28,14 +28,16 @@ namespace Features.Popup
         [Header("Settings")]
         [SerializeField] private float m_openDuration = 0.2f;
         [SerializeField] private float m_closeDuration = 0.15f;
+        
+        public IObservable<Unit> closeClicked => m_closeClicked;
+        
+        private GameObject root => m_root != null ? m_root : gameObject;
 
         private readonly Subject<Unit> m_closeClicked = new();
 
         private Sequence m_animation;
 
-        public IObservable<Unit> closeClicked => m_closeClicked;
-
-        private GameObject root => m_root != null ? m_root : gameObject;
+        private bool m_isDestroyed;
 
         private void Awake()
         {
@@ -51,6 +53,11 @@ namespace Features.Popup
             }
 
             HideImmediate();
+        }
+
+        private void OnDestroy()
+        {
+            m_isDestroyed = true;
         }
 
         public async UniTask ShowAsync(string _title, string _description)
@@ -100,6 +107,9 @@ namespace Features.Popup
 
         public void HideImmediate()
         {
+            if (m_isDestroyed)
+                return;
+            
             m_animation?.Kill();
             m_animation = null;
 

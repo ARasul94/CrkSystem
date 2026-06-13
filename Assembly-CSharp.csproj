@@ -74,8 +74,8 @@
     <Compile Include="Assets\Scripts\Core\Configs\ClickerConfig.cs" />
     <Compile Include="Assets\Scripts\Features\Dogs\Models\DogApiModels.cs" />
     <Compile Include="Assets\Scripts\Features\Weather\Requests\WeatherForecastRequest.cs" />
-    <Compile Include="Assets\Scripts\Features\Navigation\NavigationView.cs" />
     <Compile Include="Assets\Scripts\Features\Dogs\Requests\DogRequestTags.cs" />
+    <Compile Include="Assets\Scripts\Features\Navigation\NavigationView.cs" />
     <Compile Include="Assets\Scripts\Features\Clicker\ClickerClickVfx.cs" />
     <Compile Include="Assets\Scripts\Features\Navigation\Presenters\ITabPresenter.cs" />
     <Compile Include="Assets\Scripts\Features\Clicker\ClickerService.cs" />
